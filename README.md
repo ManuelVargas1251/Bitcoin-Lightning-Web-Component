@@ -6,3 +6,7 @@ query coindesk bitcoin price from inside Salesforce dashboard.
 
 ## reference
 https://trailhead.salesforce.com/en/content/learn/projects/quick-start-lightning-web-components/create-a-hello-world-lightning-web-component?trail_id=build-lightning-web-components
+
+https://github.com/ManuelVargas1251/BTC-USD-Converter
+
+https://old.coindesk.com/coindesk-api
