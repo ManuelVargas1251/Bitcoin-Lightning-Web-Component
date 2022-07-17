@@ -1,3 +1,12 @@
+# sfdx
+BitcoinLightningWebComponent/.sfdx
+BitcoinLightningWebComponent/.vscode
+.DS_Store
+.sfdx
+.project
+.salesforce
+.settings
+
 # Logs
 logs
 *.log
