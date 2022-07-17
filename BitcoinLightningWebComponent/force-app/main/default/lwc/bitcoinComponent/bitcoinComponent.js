@@ -1,17 +1,19 @@
-import {LightningElement,track} from 'lwc';
+import { LightningElement, track } from 'lwc';
 export default class bitcoinComponent extends LightningElement {
-	@track BTCVALUE;
+	BTCVALUE;
+	lastUpdatedDateTime;
 	loading = true;
-	updateButton(){
-		const d = new Date().getTime()
-		console.log('Date: ' + d);
+	updateButton() {
 		fetch('https://api.coindesk.com/v1/bpi/currentprice.json')
-				.then(response => response.json())
-				.then(data => {
+			.then(response => response.json())
+			.then(data => {
 				this.BTCVALUE = data.bpi.USD.rate_float;	//display price
 				this.loading = false;	// hide loading spinner
+				this.lastUpdatedDateTime = new Date().getTime()
 				console.log(this.BTCVALUE);
-		});
+			}).catch((error) => {
+				console.log(error)
+			});
 	}
-	connectedCallback(){this.updateButton()}
+	connectedCallback() { this.updateButton() }
 }
