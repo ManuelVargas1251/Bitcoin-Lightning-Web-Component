@@ -1,8 +1,7 @@
 # Bitcoin Lightning Web Component
 Query coindesk bitcoin price from inside Salesforce dashboard.
 
-![image](https://user-images.githubusercontent.com/10030407/140394085-211740e4-70f9-42db-a075-3de8b82ed04d.png)
-
+![image](https://user-images.githubusercontent.com/10030407/179420812-f790363a-ef05-481c-8186-2c30cd706d13.png)
 
 ## Deployment
 To import to your own org, 
