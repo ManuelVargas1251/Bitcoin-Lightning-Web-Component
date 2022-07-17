@@ -1,11 +1,36 @@
 <template>
 	<lightning-card title="BTC Price" icon-name="custom:custom41">
 		<div class="slds-var-m-around_medium">
-			<lightning-button label="Refresh" onclick={updateButton}></lightning-button>
-			<lightning-formatted-number class="slds-align_absolute-center" maximum-fraction-digits="2" value={BTCVALUE}></lightning-formatted-number>
+			
+			<lightning-formatted-number 
+				class="slds-align_absolute-center slds-text-heading_large slds-var-p-bottom_large"
+				maximum-fraction-digits="2"
+				format-style="currency"
+				currency-code="USD"
+				value={BTCVALUE}>
+			</lightning-formatted-number>
+
+			Last Update:
+			<lightning-formatted-date-time
+				value={lastUpdatedDateTime}
+				year="numeric"
+				month="numeric"
+				day="numeric"
+				hour="2-digit"
+				minute="2-digit"
+				time-zone-name="short">
+			</lightning-formatted-date-time>
+
+			<lightning-button label="Refresh" onclick={updateButton} class="slds-float_right"></lightning-button>
+
 			<template if:true={loading}>
-				<lightning-spinner name="spin" class="hello" alternative-text="Loading" size="small"></lightning-spinner>
+				<lightning-spinner alternative-text="Loading" size="small">
+				</lightning-spinner>
 			</template>
+			
 		</div>
+		<p slot="footer">
+			<lightning-formatted-url value="https://www.coindesk.com/price/bitcoin/" tooltip="Click to view more info" label="View on CoinDesk" target="_blank" ></lightning-formatted-url>
+		</p>
 	</lightning-card>
 </template>
