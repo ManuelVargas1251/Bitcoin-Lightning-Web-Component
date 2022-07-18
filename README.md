@@ -1,7 +1,17 @@
 # Bitcoin Lightning Web Component
 Query coindesk bitcoin price from inside Salesforce dashboard.
 
+
+
 ![image](https://user-images.githubusercontent.com/10030407/179420812-f790363a-ef05-481c-8186-2c30cd706d13.png)
+
+## Community
+In order to make the component availble publicly, I created a Salesforce Community and reused the same component.
+View the component in my [Community Sandbox](https://musicvideos-developer-edition.na162.force.com/sandboxvforcesite/sandbox).
+
+### Community References
+- https://developer.salesforce.com/blogs/2019/04/lightning-web-components-in-lightning-communities
+- https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.reference_configuration_tags
 
 ## Deployment
 To import to your own org, 
@@ -30,12 +40,16 @@ sfdx auth:web:login -a yourOrgName --instanceurl [your url]
 sfdx force:source:deploy -m LightningComponentBundle:bitcoinComponent
 ```
 
+### Deployment References
+- [My SFDX Reference gist](https://gist.github.com/ManuelVargas1251/b43b17fe6c4f45ee9d5276ca434f014b)
+- https://trailhead.salesforce.com/en/content/learn/modules/lightning-web-components-basics/push-lightning-web-component-files
+- https://trailhead.salesforce.com/en/content/learn/modules/lightning-web-components-basics/push-lightning-web-component-files
 
 ## Javascript
 Calling the coindesk api and assigning to global variable
 
 ```js
-import { LightningElement, track } from 'lwc';
+import { LightningElement } from 'lwc';
 export default class bitcoinComponent extends LightningElement {
 	BTCVALUE;
 	lastUpdatedDateTime;
@@ -45,7 +59,7 @@ export default class bitcoinComponent extends LightningElement {
 			.then(response => response.json())
 			.then(data => {
 				this.BTCVALUE = data.bpi.USD.rate_float;	//display price
-				this.loading = false;	// hide loading spinner
+				this.loading = false;						// hide loading spinner
 				this.lastUpdatedDateTime = new Date().getTime()
 				console.log(this.BTCVALUE);
 			}).catch((error) => {
@@ -56,67 +70,69 @@ export default class bitcoinComponent extends LightningElement {
 }
 ```
 
-## Html
+## js references
+- https://trailhead.salesforce.com/en/content/learn/projects/quick-start-lightning-web-components/create-a-hello-world-lightning-web-component?trail_id=build-lightning-web-components
+- https://github.com/ManuelVargas1251/BTC-USD-Converter
+- https://old.coindesk.com/coindesk-api
+- https://gist.github.com/ManuelVargas1251/b43b17fe6c4f45ee9d5276ca434f014b
+- https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_lifecycle_hooks_dom
+- https://developer.salesforce.com/docs/component-library/documentation/en/lwc/create_conditional
+- https://help.salesforce.com/s/articleView?id=release-notes.rn_lwc_track.htm&type=5&release=224
+
+## HTML
 Using ecma templates and lwc functionality
 
 ```html
 <template>
 	<lightning-card title="BTC Price" icon-name="custom:custom41">
 		<div class="slds-var-m-around_medium">
-			
-			<lightning-formatted-number 
+			<!-- BTC Price -->
+			<lightning-formatted-number
 				class="slds-align_absolute-center slds-text-heading_large slds-var-p-bottom_large"
-				maximum-fraction-digits="2"
-				format-style="currency"
-				currency-code="USD"
-				value={BTCVALUE}>
+				maximum-fraction-digits="2" format-style="currency" currency-code="USD" value={BTCVALUE}>
 			</lightning-formatted-number>
-
-			Last Update:
-			<lightning-formatted-date-time
-				value={lastUpdatedDateTime}
-				year="numeric"
-				month="numeric"
-				day="numeric"
-				hour="2-digit"
-				minute="2-digit"
-				time-zone-name="short">
-			</lightning-formatted-date-time>
-
-			<lightning-button label="Refresh" onclick={updateButton} class="slds-float_right"></lightning-button>
-
+			<!-- Formatted Grid -->
+			<div class="slds-grid slds-grid_vertical-align-end">
+				<div class="slds-col slds-size_2-of-3">
+					<!-- Last Updated Datetime -->
+					<div>Last Updated:</div>
+					<lightning-formatted-date-time value={lastUpdatedDateTime} year="numeric" month="numeric"
+						day="numeric" hour="2-digit" minute="2-digit" time-zone-name="short">
+					</lightning-formatted-date-time>
+				</div>
+				<div class="slds-col slds-size_1-of-3">
+					<!-- Refresh Price Button -->
+					<lightning-button label="Refresh" onclick={updateButton} class="slds-float_right">
+					</lightning-button>
+				</div>
+			</div>
+			<!-- Loading Icon -->
 			<template if:true={loading}>
 				<lightning-spinner alternative-text="Loading" size="small">
 				</lightning-spinner>
 			</template>
-			
 		</div>
-		<p slot="footer">
-			<lightning-formatted-url value="https://www.coindesk.com/price/bitcoin/" tooltip="Click to view more info" label="View on CoinDesk" target="_blank" ></lightning-formatted-url>
-		</p>
+		<!-- Footer Link - New Tab -->
+		<div slot="footer">
+			<lightning-formatted-url value="https://www.coindesk.com/price/bitcoin/" tooltip="Click to view more info"
+				label="View on CoinDesk" target="_blank"></lightning-formatted-url>
+		</div>
 	</lightning-card>
 </template>
 ```
 
+### Markup References
+- https://developer.salesforce.com/docs/component-library/bundle/lightning-card/example
+- https://www.lightningdesignsystem.com/utilities/padding/#site-main-content
+- https://www.lightningdesignsystem.com/utilities/grid/#Vertical-Axis
+- https://www.lightningdesignsystem.com/utilities/alignment/
 
 
-## reference
-https://trailhead.salesforce.com/en/content/learn/projects/quick-start-lightning-web-components/create-a-hello-world-lightning-web-component?trail_id=build-lightning-web-components
+## Security Permissions
+For API callouts to CoinDesk, add a new Trusted Site record in Setup > CSP Trusted Sites.
 
-https://github.com/ManuelVargas1251/BTC-USD-Converter
+### Security References
+- https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/csp_trusted_sites.htm
+- https://developer.salesforce.com/blogs/2022/03/working-with-cors-and-csp-to-call-apis-from-lwc
+- https://developer.salesforce.com/docs/atlas.en-us.238.0.lightning.meta/lightning/security_csp.htm
 
-https://old.coindesk.com/coindesk-api
-
-https://gist.github.com/ManuelVargas1251/b43b17fe6c4f45ee9d5276ca434f014b
-
-https://developer.salesforce.com/docs/component-library/documentation/en/lwc/lwc.create_lifecycle_hooks_dom
-
-https://developer.salesforce.com/docs/component-library/documentation/en/lwc/create_conditional
-
-https://www.lightningdesignsystem.com/utilities/alignment/
-
-https://developer.salesforce.com/docs/component-library/bundle/lightning-card/example
-
-https://www.lightningdesignsystem.com/utilities/padding/#site-main-content
-
-https://help.salesforce.com/s/articleView?id=release-notes.rn_lwc_track.htm&type=5&release=224
