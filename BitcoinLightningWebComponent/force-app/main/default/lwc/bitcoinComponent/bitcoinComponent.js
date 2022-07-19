@@ -1,4 +1,4 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement } from 'lwc';
 export default class bitcoinComponent extends LightningElement {
 	BTCVALUE;
 	lastUpdatedDateTime;
@@ -8,7 +8,7 @@ export default class bitcoinComponent extends LightningElement {
 			.then(response => response.json())
 			.then(data => {
 				this.BTCVALUE = data.bpi.USD.rate_float;	//display price
-				this.loading = false;	// hide loading spinner
+				this.loading = false;						// hide loading spinner
 				this.lastUpdatedDateTime = new Date().getTime()
 				console.log(this.BTCVALUE);
 			}).catch((error) => {
