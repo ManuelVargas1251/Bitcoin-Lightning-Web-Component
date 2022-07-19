@@ -1,13 +1,14 @@
 # Bitcoin Lightning Web Component
 Query coindesk bitcoin price from inside Salesforce dashboard.
 
-
-
-![image](https://user-images.githubusercontent.com/10030407/179420812-f790363a-ef05-481c-8186-2c30cd706d13.png)
+![image](https://user-images.githubusercontent.com/10030407/179635558-66847529-d604-4439-a581-9ada705b3a2f.png)
 
 ## Community
 In order to make the component availble publicly, I created a Salesforce Community and reused the same component.
 View the component in my [Community Sandbox](https://musicvideos-developer-edition.na162.force.com/sandboxvforcesite/sandbox).
+
+![image](https://user-images.githubusercontent.com/10030407/179636523-70ac9977-2fbb-49e0-b71d-b1bcca7f17c7.png)
+
 
 ### Community References
 - https://developer.salesforce.com/blogs/2019/04/lightning-web-components-in-lightning-communities
@@ -39,6 +40,9 @@ sfdx auth:web:login -a yourOrgName --instanceurl [your url]
 ```sh
 sfdx force:source:deploy -m LightningComponentBundle:bitcoinComponent
 ```
+
+![image](https://user-images.githubusercontent.com/10030407/179635782-acffb361-cbbd-4d6c-8e43-b4531d939a84.png)
+
 
 ### Deployment References
 - [My SFDX Reference gist](https://gist.github.com/ManuelVargas1251/b43b17fe6c4f45ee9d5276ca434f014b)
@@ -130,6 +134,8 @@ Using ecma templates and lwc functionality
 
 ## Security Permissions
 For API callouts to CoinDesk, add a new Trusted Site record in Setup > CSP Trusted Sites.
+
+![image](https://user-images.githubusercontent.com/10030407/179635692-d43e34b3-7518-4abb-8dea-5fe2560f301b.png)
 
 ### Security References
 - https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/csp_trusted_sites.htm
