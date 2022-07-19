@@ -5,7 +5,7 @@ Query coindesk bitcoin price from inside Salesforce dashboard.
 
 ## Community
 In order to make the component availble publicly, I created a Salesforce Community and reused the same component.
-View the component in my [Community Sandbox](https://musicvideos-developer-edition.na162.force.com/sandboxvforcesite/sandbox).
+View the component in my [Community Sandbox](https://musicvideos-developer-edition.na162.force.com/sandbox/).
 
 ![image](https://user-images.githubusercontent.com/10030407/179636523-70ac9977-2fbb-49e0-b71d-b1bcca7f17c7.png)
 
@@ -74,7 +74,7 @@ export default class bitcoinComponent extends LightningElement {
 }
 ```
 
-## js references
+## Javascript References
 - https://trailhead.salesforce.com/en/content/learn/projects/quick-start-lightning-web-components/create-a-hello-world-lightning-web-component?trail_id=build-lightning-web-components
 - https://github.com/ManuelVargas1251/BTC-USD-Converter
 - https://old.coindesk.com/coindesk-api
